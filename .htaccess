@@ -1,0 +1,35 @@
+<Files .htpasswd>
+   deny from all
+</Files>
+
+#Options +FollowSymLinks
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+
+	ErrorDocument 404 /404.html 
+
+	# Redirect www to non-www
+	RewriteCond %{HTTP_HOST} ^www\.(.*)
+	RewriteRule (.*) http://%1/$1 [R=301,L]
+
+	# sitemap.xml
+	RewriteCond %{REQUEST_URI} sitemap\.xml$  [NC]
+	RewriteRule (.*) index.php?m=static_page&a=sitemap [L]
+
+	# hotline.xml
+        RewriteCond %{REQUEST_URI} hotline\.xml$  [NC]
+        RewriteRule (.*) index.php?m=shop&a=hotline_export [L]
+
+	# yandex.xml
+        RewriteCond %{REQUEST_URI} yandex\.xml$  [NC]
+        RewriteRule (.*) index.php?m=shop&a=yandex_export [L]
+
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule (.*) index.php [L]
+</IfModule>
+<IfModule !mod_rewrite.c>
+	ErrorDocument 404 /index.php
+</IfModule>

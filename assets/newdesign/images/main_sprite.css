@@ -1,0 +1,125 @@
+.b_facebook {
+  background: url(main_sprite.png) 0px -71px no-repeat;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+
+.b_google {
+  background: url(main_sprite.png) -34px -71px no-repeat;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+
+.b_instagram {
+  background: url(main_sprite.png) -68px -71px no-repeat;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+
+.b_skype {
+  background: url(main_sprite.png) -110px 0px no-repeat;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+
+.b_viber {
+  background: url(main_sprite.png) -110px -34px no-repeat;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+
+.b_vk {
+  background: url(main_sprite.png) -110px -68px no-repeat;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+}
+
+.big_arrow_left {
+  background: url(main_sprite.png) 0px 0px no-repeat;
+  display: inline-block;
+  width: 22px;
+  height: 69px;
+}
+
+.big_arrow_right {
+  background: url(main_sprite.png) -24px 0px no-repeat;
+  display: inline-block;
+  width: 22px;
+  height: 69px;
+}
+
+.mail_bottom {
+  background: url(main_sprite.png) -67px -105px no-repeat;
+  display: inline-block;
+  width: 15px;
+  height: 11px;
+}
+
+.phone {
+  background: url(main_sprite.png) -67px -44px no-repeat;
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+}
+
+.phone_bottom {
+  background: url(main_sprite.png) -48px -44px no-repeat;
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+}
+
+.small_arrow_left {
+  background: url(main_sprite.png) -92px 0px no-repeat;
+  display: inline-block;
+  width: 16px;
+  height: 33px;
+}
+
+.small_arrow_right {
+  background: url(main_sprite.png) -92px -35px no-repeat;
+  display: inline-block;
+  width: 16px;
+  height: 33px;
+}
+
+.top_basket {
+  background: url(main_sprite.png) 0px -105px no-repeat;
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+}
+
+.top_logo {
+  background: url(main_sprite.png) -48px 0px no-repeat;
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+}
+
+.top_search {
+  background: url(main_sprite.png) -49px -105px no-repeat;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+
+.top_user {
+  background: url(main_sprite.png) -19px -105px no-repeat;
+  display: inline-block;
+  width: 11px;
+  height: 17px;
+}
+
+.viber {
+  background: url(main_sprite.png) -32px -105px no-repeat;
+  display: inline-block;
+  width: 15px;
+  height: 17px;
+}

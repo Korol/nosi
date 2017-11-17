@@ -1,0 +1,47 @@
+ADD:
++application/controllers/newdesign/
++application/controllers/ajax.php
++application/core/MY_Controller.php
++application/helpers/functions_helper.php
++application/models/base_model.php
++application/views/newdesign/
++assets/newdesign/
++создать директорию mosaic по пути /uploads/shop/products
+
+EDIT:
++application/config/routes.php
+
+SQL:
+табличка для дебага:
+CREATE TABLE `error_log` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `error_text` text,
+  `script` varchar(255) DEFAULT NULL,
+  `method` varchar(255) DEFAULT NULL,
+  `error_ts` datetime DEFAULT CURRENT_TIMESTAMP,
+  `info` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+slick_sliders:
+CREATE TABLE `slick_sliders` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `widget_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+mosaics:
+CREATE TABLE `mosaics` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `widget_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `position` enum('1','2','3','4','5','6','7','8','9','10') DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `type` enum('product','category') DEFAULT 'product',
+  `url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

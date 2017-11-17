@@ -1,0 +1,44 @@
+BOTTEGA VENETA на БОТТЕГА ВЕНЕТА,
+BALENCIAGA на БАЛЕНСИАГА,
+GUCCI на ГУЧЧИ,
+Yves Saint Laurent на Ив Сен Лоран
+Saint Laurent на Сен Лоран
+YSL на ИСЛ
+
+TITLE:
+SELECT COUNT(`id`) FROM `shop_products_copy` WHERE `title` LIKE '%BOTTEGA VENETA%'; -- 25
+SELECT COUNT(`id`) FROM `shop_products_copy` WHERE `title` LIKE '%BALENCIAGA%'; -- 29
+SELECT COUNT(`id`) FROM `shop_products_copy` WHERE `title` LIKE '%GUCCI%'; -- 238
+SELECT COUNT(`id`) FROM `shop_products_copy` WHERE `title` LIKE '%Yves Saint Laurent%'; -- 3
+SELECT COUNT(`id`) FROM `shop_products_copy` WHERE `title` LIKE '%Saint Laurent%'; -- 4
+SELECT COUNT(`id`) FROM `shop_products_copy` WHERE `title` LIKE '%YSL%'; -- 7
+
+DESCRIPTION:
+SELECT COUNT(`id`) FROM `shop_products_copy` WHERE `full_description` LIKE '%BOTTEGA VENETA%'; -- 15
+SELECT COUNT(`id`) FROM `shop_products_copy` WHERE `full_description` LIKE '%BALENCIAGA%'; -- 18
+SELECT COUNT(`id`) FROM `shop_products_copy` WHERE `full_description` LIKE '%GUCCI%'; -- 176
+SELECT COUNT(`id`) FROM `shop_products_copy` WHERE `full_description` LIKE '%Yves Saint Laurent%'; -- 2
+SELECT COUNT(`id`) FROM `shop_products_copy` WHERE `full_description` LIKE '%Saint Laurent%'; -- 3
+SELECT COUNT(`id`) FROM `shop_products_copy` WHERE `full_description` LIKE '%YSL%'; -- 5
+
+REPLACE:
+TITLE:
+UPDATE `shop_products` SET `title`= REPLACE(`title`, 'Bottega Veneta', 'Боттега Венета');
+UPDATE `shop_products` SET `title`= REPLACE(`title`, 'BALENCIAGA', 'БАЛЕНСИАГА');
+UPDATE `shop_products` SET `title`= REPLACE(`title`, 'Balenciaga', 'Баленсиага');
+UPDATE `shop_products` SET `title`= REPLACE(`title`, 'GUCCI', 'ГУЧЧИ');
+UPDATE `shop_products` SET `title`= REPLACE(`title`, 'Gucci', 'Гуччи');
+UPDATE `shop_products` SET `title`= REPLACE(`title`, 'Yves Saint Laurent', 'Ив Сен Лоран');
+UPDATE `shop_products` SET `title`= REPLACE(`title`, 'Saint Laurent', 'Сен Лоран');
+UPDATE `shop_products` SET `title`= REPLACE(`title`, 'YSL', 'ИСЛ');
+
+DESCRIPTION:
+UPDATE `shop_products` SET `full_description`= REPLACE(`full_description`, 'Bottega Veneta', 'Боттега Венета');
+UPDATE `shop_products` SET `full_description`= REPLACE(`full_description`, 'BOTTEGA VENETA', 'БОТТЕГА ВЕНЕТА');
+UPDATE `shop_products` SET `full_description`= REPLACE(`full_description`, 'BALENCIAGA', 'БАЛЕНСИАГА');
+UPDATE `shop_products` SET `full_description`= REPLACE(`full_description`, 'Balenciaga', 'Баленсиага');
+UPDATE `shop_products` SET `full_description`= REPLACE(`full_description`, 'GUCCI', 'ГУЧЧИ');
+UPDATE `shop_products` SET `full_description`= REPLACE(`full_description`, 'Gucci', 'Гуччи');
+UPDATE `shop_products` SET `full_description`= REPLACE(`full_description`, 'Yves Saint Laurent', 'Ив Сен Лоран');
+UPDATE `shop_products` SET `full_description`= REPLACE(`full_description`, 'Saint Laurent', 'Сен Лоран');
+UPDATE `shop_products` SET `full_description`= REPLACE(`full_description`, 'YSL', 'ИСЛ');

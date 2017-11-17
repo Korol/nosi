@@ -1,0 +1,24 @@
+Main page:
+Число запросов на страницу: 446 (!)
+Повторы запросов:
+7
+SELECT * FROM (`shop_carts`) WHERE `id` =  0;
+--
+132 - меняется только значение `parent_id`
+SELECT `id`, `title`
+FROM (`categoryes`)
+WHERE `type` IN ('menu','menu-item')
+AND `parent_id` =  '1666'
+ORDER BY `order`;
+--
+279 - меняется только значение `id`
+SELECT *
+FROM (`url_structure`)
+WHERE `id` =  '243';
+--
+109
+SELECT `url_structure`.`url`
+FROM (`url_structure`)
+WHERE `module` =  'shop'
+AND `action` =  'category_base';
+--

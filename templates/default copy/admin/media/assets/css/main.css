@@ -1,0 +1,68 @@
+.browseList .browseListRow {
+	float:left;
+	width:128px;
+	height:165px;
+	margin-right:20px;
+	margin-bottom:20px;
+}
+
+.browseList .browseListRow a.thumb {
+	display:block;
+	background:url(../media/media_dir.png);
+	height:128px;
+	width:128px;
+}
+
+.browseList .browseListRow a .noveCover {
+	display:block;
+	width:128px;
+	height:113px;
+	position:relative;
+	top:15px;
+	background:url(../media/media-nophoto.png) no-repeat center center;
+}
+
+.browseList .browseListRow a .cover {
+	display:block;
+	width:100px;
+	height:70px;
+	margin:0 auto;
+	position:relative;
+	top:38px;
+	background:url(../media/media-nophoto.png) no-repeat center center;
+}
+
+.browseList .browseListRow a.info {
+	background:url(../media/information.png) no-repeat;
+	display:block;
+	height:16px;
+	width:16px;
+	float:right;
+	margin-right:5px;
+}
+
+.browseList .browseListRow a.edit {
+	background:url(../media/pencil.png) no-repeat;
+	display:block;
+	height:16px;
+	width:16px;
+	float:right;
+	margin-right:5px;
+}
+
+.browseList .browseListRow a.remove {
+	background:url(../media/cross.png) no-repeat;
+	display:block;
+	height:16px;
+	width:16px;
+	float:right;
+}
+
+.browseList .browseListRow a.photoThumb {
+	display:block;
+	background-position:center center;
+	background-repeat:no-repeat;
+	width:128px;
+	margin-top:5px;
+	height:103px;	
+}

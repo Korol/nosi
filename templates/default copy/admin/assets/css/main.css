@@ -1,0 +1,312 @@
+/* CSS Reset */
+html, body {
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  color:#000;
+  background:#FFF;
+}
+
+body {
+  background:#FFF;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+select,
+p,
+blockquote,
+th,
+td {
+  margin:0;
+  padding:0;
+
+  font-weight:normal;
+  font-family:Arial;
+  font-size:12px;
+}
+
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+
+fieldset,
+img {
+  border:0;
+}
+
+address,
+button,
+caption,
+cite,
+code,
+dfn,
+em,
+input,
+optgroup,
+option,
+select,
+strong,
+textarea,
+th,
+var {
+    font:inherit;
+}
+
+del,
+ins {
+  text-decoration:none;
+}
+
+li {
+  list-style:none;
+}
+
+caption,
+th {
+  text-align:left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size:100%;
+  font-weight:normal;
+}
+
+q:before,
+q:after {
+  content:'';
+}
+
+abbr,
+acronym {
+  border:0;
+  font-variant:normal;
+}
+
+sup {
+  vertical-align:baseline;
+}
+
+sub {
+  vertical-align:baseline;
+}
+
+legend {
+  color:#000;
+}
+
+a, a:visited {
+  color:#000;
+  text-decoration:underline;
+}
+
+a:hover, a:active {
+  color:inherit;
+  text-decoration:none;
+}
+
+small {
+  color:gray;
+}
+
+/* CSS framework helpers */
+
+div.clear {
+  clear:both;
+}
+
+/* CSS framework greed */
+
+#pageFooter {
+  width:1000px;
+  margin:0 auto;
+  height:100px;
+  position:relative;
+  margin-top:-100px;
+  background:#c6c6c6;
+}
+
+#pageContent {
+  padding-bottom:100px;
+}
+
+#pageWrap {
+  background:gray;
+  width:1000px;
+  margin:0 auto;
+  position:relative;
+  min-height:100%;
+}
+
+* html #wrap {
+  height:100%;
+}
+
+/* CSS other */
+
+
+
+.fixed-nav {
+  position:fixed;
+  top:80px;
+}
+
+.fixed-nav .nav-row {
+  width:70px;
+  padding-bottom:20px;
+}
+
+.fixed-nav a {
+  margin:0 auto;
+  display:block;
+  width:60px;
+  height:32px;
+  background-repeat:no-repeat;
+  background-position:center center;
+}
+
+.fixed-nav .nav-row a.loading {
+  background-image:url(/templates/default/admin/assets/icons/32x32/apply-loader.gif) !important;
+}
+
+.fixed-nav .nav-row a span {
+  padding-top:32px;
+  display:block;
+  font-size:11px;
+}
+
+
+
+
+
+/* structure tree - start */
+div.siteStructureTree ul.tree, div.siteStructureTree ul.tree ul {
+  list-style-type:none;
+  background: url(../tree/vline.png) repeat-y;
+  margin:0;
+  padding:0;
+}
+
+div.siteStructureTree ul.tree ul {
+  margin-left:10px;
+}
+
+div.siteStructureTree ul.tree li {
+  margin:0;
+  padding:0 12px;
+  line-height:25px;
+  background:url(../tree/node.png) no-repeat;
+}
+
+div.siteStructureTree ul.tree li.last {
+  background:url(../tree/lastnode.png) no-repeat;
+}
+
+div.siteStructureTree li a {
+  font-size:12px;
+  border:1px solid #CDCDCD;
+  padding:2px;
+  padding-right:20px;
+  background:#FFF url(../tree/bullet_arrow_down2.gif) no-repeat right center;
+  text-decoration:none;
+}
+div.siteStructureTree li a:hover {
+  padding:3px;
+  padding-right:20px;
+  position:relative;
+  z-index:2;
+  left:-1px;
+  border:1px solid #CDCDCD;
+  background-color:#F1F1F1;
+}
+
+div.siteStructureTree li a.droped {
+  padding:3px;
+  padding-right:20px;
+  position:relative;
+  z-index:2;
+  left:-1px;
+  border:1px solid #fbab00;
+  background-color:#fef2d9;
+}
+
+div.siteStructureTree li.folder {
+  
+}
+
+div.siteStructureTree li.placeholder {
+  height:26px;
+  background:#CDCDCD;
+}
+/* structure tree - end */
+
+#simpleDropDownW {
+  display:none;
+  border:1px solid #CDCDCD;
+  position:absolute;
+  background-color:#FFF;
+  z-index:99999;
+}
+
+#simpleDropDownW ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+#simpleDropDownW ul li {
+  margin-top:3px;
+  margin-bottom:3px;
+  margin-left:0;
+}
+
+#simpleDropDownW ul li.p {
+  margin:3px;
+  height:1px;
+  background-color:#CDCDCD;
+}
+
+#simpleDropDownW ul li a {
+  display:block;
+  padding:4px 10px;
+  text-decoration:none;
+  font-size:11px;
+}
+
+#simpleDropDownW ul li a:hover {
+  background-color:#F1F1F1;
+  text-decoration:underline;
+}
+
+#simpleDropDownW ul li a.icon {
+  background-position:5px center;
+  background-repeat:no-repeat;
+  padding-left:26px;
+}
