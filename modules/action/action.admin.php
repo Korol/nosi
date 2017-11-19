@@ -34,6 +34,9 @@ class actionModule extends shopModuleHelper
         $this->data['get'] = $this->ci->input->get(null, true);
         $this->data['action_products'] = $this->get_action_participants();
         $this->data['flash'] = $this->ci->session->flashdata('action_success');
+        $this->data['total_products'] = 0;
+        $this->data['data_type'] = '';
+        $this->data['products'] = array();
         // товары
         $page = (!empty($_GET['page'])) ? (int)$_GET['page'] : 1;
         if(!empty($this->data['selected_cat']) && empty($_GET['show'])){
@@ -266,7 +269,7 @@ class actionModule extends shopModuleHelper
                 foreach ($p_ex as $p_ex_item){
                     // данные имеют вид: 23342_15 (IDтовара_процент)
                     $pei_ex = explode('_', $p_ex_item);
-                    if((sizeof($pei_ex) == 2) && (!empty((int)$pei_ex[0]) && !empty((int)$pei_ex[1]))){
+                    if((sizeof($pei_ex) == 2) && (!empty($pei_ex[0]) && !empty($pei_ex[1]))){
                         // если ID товара и % больше 0 – работаем
                         // проверяем, есть ли такая запись в БД
                         $check = $this->db

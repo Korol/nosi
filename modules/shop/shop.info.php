@@ -53,7 +53,7 @@ class shopModuleInfo {
                                         "stats:products_by" => "",
                                         "stats:summary" => "",
 
-                   // "action:setup" => "Акция",
+                    "action:setup" => "Акция",
                             
 //                                        "price:categories" => "Прайс Hotline",
 //                                        "price:build_price" => "",
