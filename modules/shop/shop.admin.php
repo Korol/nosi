@@ -1732,6 +1732,19 @@ EOF;
             "attr:onchange"=> ($edit) ? "changePrice('discount');" : "",
         ));
 
+        if($edit){
+            $action = $this->check_product_action($_GET['id']);
+            if(!empty($action['percent'])){
+                $this->ci->fb->add("input:text",array(
+                    "label"=>"Скидка по Акции, %",
+                    "attr:style"=>"width:100px;",
+                    "name"=>"action_percent",
+                    "parent"=>"greed",
+                    "value" => $action['percent']
+                ));
+            }
+        }
+
 		$this->ci->fb->add("upload:editor",array(
 			"label"=>"Прикрепить файлы",
 			"component_type"=>"module",
@@ -2258,6 +2271,37 @@ EOF;
 					));
 
 					$id=$_GET['id'];
+
+					// обновляем акционную скидку – если она есть у товара
+                    if(!empty($action['percent'])){
+                        $post_percent = $this->input->post('action_percent', true);
+                        if(empty($post_percent)){
+                            // удаляем товар из акции
+                            $this->db->delete(
+                                'action_product',
+                                array(
+                                    'action_id' => $action['id'],
+                                    'product_id' => $_GET['id'],
+                                )
+                            );
+                        }
+                        else{
+                            // если новый процент отличается от старого – обновляем
+                            if(((int)$post_percent != (int)$action['percent'])
+                                && ((int)$post_percent < 100))
+                            {
+                                $this->db->update(
+                                    'action_product',
+                                    array('percent' => $post_percent),
+                                    array(
+                                        'action_id' => $action['action_info']['id'],
+                                        'product_id' => $_GET['id'],
+                                    )
+                                );
+                            }
+                        }
+                    }
+
 				}else{
 					
 					$this->d['insert']=array(
@@ -5668,5 +5712,34 @@ EOF;
 
             return $options['lowercase'] ? mb_strtolower($str, 'UTF-8') : $str;
        }
+
+    /**
+     * если продукт участвует в активной акции
+     * то возвращает массив с информацией о скидке,
+     * назначенной продукту в данной активной акции
+     * если не участвует – то false
+     * @param $product_id
+     * @return bool|array
+     */
+    public function check_product_action($product_id)
+    {
+        $active_action = $this->db
+            ->where('active', 1)
+            ->limit(1)
+            ->get('action')->row_array();
+        if(!empty($active_action)){
+            $check_product = $this->db
+                ->where(array(
+                    'action_id' => $active_action['id'],
+                    'product_id' => $product_id,
+                ))
+                ->get('action_product')->row_array();
+            if(!empty($check_product)) {
+                $check_product['action_info'] = $active_action;
+            }
+            return $check_product;
+        }
+        return false;
+    }
 }
 ?>
