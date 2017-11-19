@@ -2280,7 +2280,7 @@ EOF;
                             $this->db->delete(
                                 'action_product',
                                 array(
-                                    'action_id' => $action['id'],
+                                    'action_id' => $action['action_info']['id'],
                                     'product_id' => $_GET['id'],
                                 )
                             );
