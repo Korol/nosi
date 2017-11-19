@@ -36,6 +36,16 @@ $currencies = array(
 <div class="row">
 <!--    Описание категории-->
     <?php
+    // black friday
+    $current_ts = time();
+    $end_ts = mktime(23, 59, 59, 11, 24, 2017);
+    if($current_ts <= $end_ts):
+        ?>
+        <div class="col-lg-12">
+            <img src="/uploads/banners/black_friday.jpg" style="margin: 10px auto 20px;" class="img-responsive" alt="Black Friday Banner"/>
+        </div>
+    <?php else: ?>
+    <?php
     if(!empty($category_description)) {
         ?>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-center">
@@ -52,6 +62,7 @@ $currencies = array(
             </div>
         </div>
     <?php } ?>
+    <?php endif; ?>
 <!--    Категории-->
 <?php if(!empty($subcats)){ ?>
     <div class="col-lg-4 col-lg-offset-2 col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12 text-center">

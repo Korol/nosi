@@ -37,6 +37,18 @@ $currencies = array(
     </div>
 </div>
 <div class="row">
+    <?php
+    // black friday
+    $current_ts = time();
+    $end_ts = mktime(23, 59, 59, 11, 24, 2017);
+//    var_dump($current_ts, $end_ts, date('Y-m-d H:i:s', $end_ts));
+    if($current_ts <= $end_ts):
+    ?>
+    <div class="col-lg-12">
+        <h1 class="category-title"><?= $category_info['title']; ?></h1>
+        <img src="/uploads/banners/black_friday.jpg" style="margin: 10px auto 20px; display: block;" alt="Black Friday Banner"/>
+    </div>
+    <?php else: ?>
     <div class="col-lg-2"></div>
     <div class="col-lg-8 category-info">
         <h1 class="category-title"><?= $category_info['title']; ?></h1>
@@ -52,6 +64,7 @@ $currencies = array(
         <?php } ?>
     </div>
     <div class="col-lg-2"></div>
+    <?php endif; ?>
 </div>
 
 <link rel="stylesheet" href="<?=HTTP_HOST; ?>assets/newdesign/selectric/selectric.css"/>
