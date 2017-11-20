@@ -189,6 +189,18 @@ $currencies = array(
                                 <?php
                                 $price_old = $product['price'];
                                 $price_old_class = ' vhidden';
+
+                                // если продукт участвует в текущей активной акции
+                                if(!empty($action['products'][$product['id']]['percent'])){
+                                    // реальная цена идёт типа в «старую» (зачеркнута)
+                                    $product['price_old'] = $product['price'];
+                                    // акционная цена идёт типа как «реальная»
+                                    // сумма скидки
+                                    $sale = ($product['price'] * $action['products'][$product['id']]['percent']) / 100;
+                                    // цена со скидкой
+                                    $product['price'] = ceil($product['price'] - $sale);
+                                }
+
                                 if(!empty($product['price_old'])){
                                     $price_old = $product['price_old'];
                                     $price_old_class = '';

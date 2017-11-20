@@ -9,12 +9,13 @@
  * @var $data_type
  * @var $action_products
  * @var $flash
+ * @var $currencies
  */
-$currencies = array(
-    'usd' => '$',
-    'eur' => '€',
-    'grn' => '₴',
-);
+//$currencies = array(
+//    'usd' => '$',
+//    'eur' => '€',
+//    'grn' => '₴',
+//);
 $header = (!empty($data_type)) ? (($data_type == 'category') ? ' в категории' : ' в акции') : '';
 ?>
 
@@ -124,6 +125,13 @@ $header = (!empty($data_type)) ? (($data_type == 'category') ? ' в катего
             <tbody>
             <?php
             foreach($products as $product):
+                // конвертим все цены в грн
+                if(
+                    ($product['currency'] !== 'grn') &&
+                    !empty($currencies[$product['currency'] . '_grn'])
+                ){
+                    $product['price'] = ceil($product['price'] * $currencies[$product['currency'] . '_grn']);
+                }
             ?>
             <tr>
                 <td class="check-batch">
@@ -136,7 +144,7 @@ $header = (!empty($data_type)) ? (($data_type == 'category') ? ' в катего
                         <?= $product['title']; ?>
                     </a>
                 </td>
-                <td><?= $product['price'] . ' ' . $currencies[$product['currency']]; ?></td>
+                <td><?= $product['price'] . ' грн'; ?></td>
                 <td>
                     <?= (!empty($action_products[$product['id']]['percent']))
                         ? $action_products[$product['id']]['percent'] . '%'
@@ -149,7 +157,7 @@ $header = (!empty($data_type)) ? (($data_type == 'category') ? ' в катего
                         // сумма скидки
                         $sale = ($product['price'] * $action_products[$product['id']]['percent']) / 100;
                         // цена со скидкой
-                        $price = ceil($product['price'] - $sale) . ' ' . $currencies[$product['currency']];
+                        $price = ceil($product['price'] - $sale) . ' грн';
                     }
                     else{
                         $price = '';

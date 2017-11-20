@@ -9,6 +9,7 @@
  * @var $data_type
  * @var $action_products
  * @var $flash
+ * @var $currencies
  */
 
 ?>
@@ -30,6 +31,7 @@
         'data_type' => $data_type,
         'action_products' => $action_products,
         'flash' => $flash,
+        'currencies' => $currencies,
     )
 ); ?>
 </div>

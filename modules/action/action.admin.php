@@ -37,6 +37,7 @@ class actionModule extends shopModuleHelper
         $this->data['total_products'] = 0;
         $this->data['data_type'] = '';
         $this->data['products'] = array();
+        $this->data['currencies'] = $this->get_currencies();
         // товары
         $page = (!empty($_GET['page'])) ? (int)$_GET['page'] : 1;
         if(!empty($this->data['selected_cat']) && empty($_GET['show'])){
@@ -384,6 +385,17 @@ class actionModule extends shopModuleHelper
         $this->db->where('action_id', $this->action_id);
         $this->db->delete($this->action_product);
         return 1;
+    }
+
+    public function get_currencies()
+    {
+        $res = $this->db
+            ->select('var_name, value')
+            ->like('var_name', '_grn', 'before')
+            ->get('e_rates')->result_array();
+        return (!empty($res))
+            ? for_select($res, 'var_name', 'value')
+            : array();
     }
 
     /**
