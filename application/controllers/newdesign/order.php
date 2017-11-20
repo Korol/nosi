@@ -33,7 +33,7 @@ class Order extends MY_Controller
      */
     public function cart()
     {
-        $this->data['cart'] = $this->cart->contents();var_dump($this->data['cart']);
+        $this->data['cart'] = $this->cart->contents();
         $this->data['cart_total'] = 0;
         $this->data['products'] = $this->data['colors_info'] = array();
         if(!empty($this->data['cart'])){
@@ -173,12 +173,12 @@ class Order extends MY_Controller
             // поправим цены, если какой-то товар не в валюте $currency
             foreach($cart_contents as $ck => $cv){
                 if($cv['options']['currency'] != $currency){
-                    $cv['price'] = $this->set_action_price($cv['id'], $cv['price'], true);
+                    $cart_contents[$ck]['price'] = $cv['price'] = $this->set_action_price($cv['id'], $cv['options']['original_price'], true);
                     // пока корректируем только общую стоимость корзины
                     $cart_total += (ceil($cv['price'] * $this->e_rates[$cv['options']['currency'] . '_' . $currency]) * $cv['qty']);
                 }
                 else{
-                    $cv['price'] = $this->set_action_price($cv['id'], $cv['price']);
+                    $cart_contents[$ck]['price'] = $cv['price'] = $this->set_action_price($cv['id'], $cv['options']['original_price']);
                     $cart_total += ($cv['price'] * $cv['qty']);
                 }
             }
@@ -328,7 +328,7 @@ class Order extends MY_Controller
                         $basket_products[$new_p_key]['dimensions'] = '';
                         // если валюта товара не соответствует валюте корзины $currency - тогда конвертируем цены в валюту $currency
                         $basket_products[$new_p_key]['price'] = ($pv['currency'] != $currency)
-                            ? (ceil($this->set_action_price($pv['id'], $pv['price'], true) * $this->e_rates[$pv['currency'] . '_' . $currency]))
+                            ? $this->set_action_price($pv['id'], (ceil($pv['price']) * $this->e_rates[$pv['currency'] . '_' . $currency]))
                             : $this->set_action_price($pv['id'], $pv['price']);
                         $basket_products[$new_p_key]['price_hmn'] = $basket_products[$new_p_key]['price'] . ' ' . $currency_mark;
                         $basket_products[$new_p_key]['price_total'] = ($basket_products[$new_p_key]['price'] * $cart_contents[$pv['id']]['qty']);
@@ -480,7 +480,7 @@ class Order extends MY_Controller
                         ->get_where('shop_products', array('id' => $prod['id']))->row_array();
                     if(!empty($orig)){
                         if($orig['currency'] != $currency){
-                            $pprice = ceil($this->set_action_price($prod['id'], $orig['price'], true) * $this->e_rates[$orig['currency'] . '_grn']); // в email суммы в грн
+                            $pprice = $this->set_action_price($prod['id'], ceil($orig['price'] * $this->e_rates[$orig['currency'] . '_grn'])); // в email суммы в грн
                             $prod['price_hmn'] = $pprice . ' ' . $currency_mark;
                             $prod['price_total_hmn'] = ($pprice * $prod['quantity']) . $currency_mark;
                             $bt += ($pprice * $prod['quantity']);
@@ -488,7 +488,7 @@ class Order extends MY_Controller
                         else{
                             $prod['price_hmn'] = $this->set_action_price($prod['id'], $orig['price']) . ' ' . $currency_mark;
                             $prod['price_total_hmn'] = ($this->set_action_price($prod['id'], $orig['price']) * $prod['quantity']) . $currency_mark;
-                            $bt += ($orig['price'] * $prod['quantity']);
+                            $bt += ($this->set_action_price($prod['id'], $orig['price']) * $prod['quantity']);
                         }
                     } // в email суммы в грн end
                     $email_html_products .= '<tr>';
