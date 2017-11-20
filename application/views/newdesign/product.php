@@ -252,6 +252,18 @@ $cart_btn_text = (!empty($in_cart)) ? 'Товар добавлен в корзи
                 <p class="product-artikul">Артикул: <?= $product['code']; ?></p>
                 <p class="product-price">
                     <span class="pt-title">Цена:</span>
+                    <?php
+                    // если продукт участвует в текущей активной акции
+                    if(!empty($action['percent'])){
+                        // реальная цена идёт типа в «старую» (зачеркнута)
+                        $product['price_old'] = $product['price'];
+                        // акционная цена идёт типа как «реальная»
+                        // сумма скидки
+                        $sale = ($product['price'] * $action['percent']) / 100;
+                        // цена со скидкой
+                        $product['price'] = ceil($product['price'] - $sale);
+                    }
+                    ?>
                     <span class="pt-value"><?= $product['price']; ?> <?= $product_currency; ?></span>
                     <?php if(!empty($product['price_old'])): ?>
                     <span class="pt-value-old"><?= $product['price_old']; ?> <?= $product_currency; ?></span>

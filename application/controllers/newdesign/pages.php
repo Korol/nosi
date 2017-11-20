@@ -182,6 +182,7 @@ class Pages extends MY_Controller
         $this->data['brand'] = $this->db->select('title')->get_where('categoryes', array('id' => $this->data['product']['brand_id']), 1)->row_array();
         $preorder_text = $this->config->item('preorder_text');
         $this->data['preorder_text'] = (!empty($preorder_text)) ? $preorder_text : '';
+        $this->data['action'] = $this->check_product_action($this->data['product_id']);
         // работа с валютой
         $session_currency = $this->session->userdata('currency');
         $currency = (!empty($session_currency)) ? $session_currency : 'grn';

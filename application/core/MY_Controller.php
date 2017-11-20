@@ -155,9 +155,12 @@ class MY_Controller extends CI_Controller
             // устанавливаем цену для отображения в валюте сайта
             foreach($products as $k => $v){
                 if($v['currency'] != $this->site_currency){
-                    $products[$k]['price'] = ($this->convert_price($v['price'], $v['currency']) * $cart_products[$v['id']]['qty']);
+                    $converted = $this->convert_price($v['price'], $v['currency']);
+                    $products[$k]['price'] = ($converted * $cart_products[$v['id']]['qty']);
                     $products[$k]['currency'] = $this->site_currency;
                 }
+                // акционная цена товара
+                $products[$k]['price'] = $this->set_action_price($v['id'], $products[$k]['price']);
                 $this->cart_total += $products[$k]['price']; // общая стоимость корзины
             }
         }
@@ -368,5 +371,60 @@ class MY_Controller extends CI_Controller
             $title = $title . str_replace('{__nc__}', $title, $this->title_suffix);
         }
         return $title;
+    }
+
+    /**
+     * если продукт участвует в активной акции
+     * то возвращает массив с информацией о скидке,
+     * назначенной продукту в данной активной акции
+     * если не участвует – то false
+     * @param $product_id
+     * @return bool|array
+     */
+    public function check_product_action($product_id)
+    {
+        $active_action = $this->db
+            ->where('active', 1)
+            ->where("NOW() BETWEEN `start` AND `end`", null, false)
+            ->limit(1)
+            ->get('action')->row_array();
+        if(!empty($active_action)){
+            $check_product = $this->db
+                ->where(array(
+                    'action_id' => $active_action['id'],
+                    'product_id' => $product_id,
+                ))
+                ->get('action_product')->row_array();
+            if(!empty($check_product)) {
+                $check_product['action_info'] = $active_action;
+            }
+            return $check_product;
+        }
+        return false;
+    }
+
+    /**
+     * акционная цена товара – если она есть
+     * если нет – возвращаем цену товара без изменений
+     * @param $product_id
+     * @param $product_price
+     * @param bool $no_ceil – не округлять (важно, если потом будет выполняться конвертация!)
+     * @return float
+     */
+    public function set_action_price($product_id, $product_price, $no_ceil = false)
+    {
+        if(empty($product_id) || empty($product_price)) return $product_price;
+
+        $action = $this->check_product_action($product_id);
+        if(!empty($action['percent']) && !empty($product_price)){
+            // сумма скидки
+            $sale = ($product_price * $action['percent']) / 100;
+            // цена со скидкой
+            if(empty($no_ceil))
+                $product_price = ceil($product_price - $sale);
+            else
+                $product_price = ($product_price - $sale);
+        }
+        return $product_price;
     }
 } 

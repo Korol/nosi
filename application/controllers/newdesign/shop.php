@@ -266,7 +266,7 @@ class Shop extends MY_Controller
             // получаем фото товаров и добавляем их к товарам
             if(!empty($ids)){
                 // участвуют ли продукты в текущей акции
-                $this->data['action'] = $this->check_product_action($ids);
+                $this->data['action'] = $this->check_products_action($ids);
 
                 $uploads_where = array(
                     'name' => 'product-photo',
@@ -699,7 +699,7 @@ class Shop extends MY_Controller
             // получаем фото товаров и добавляем их к товарам
             if(!empty($ids)){
                 // участвуют ли продукты в текущей акции
-                $this->data['action'] = $this->check_product_action($ids);
+                $this->data['action'] = $this->check_products_action($ids);
 
                 $uploads_where = array(
                     'name' => 'product-photo',
@@ -1418,7 +1418,7 @@ class Shop extends MY_Controller
      * @param $product_ids
      * @return bool|array
      */
-    public function check_product_action($product_ids)
+    public function check_products_action($product_ids)
     {
         $active_action = $this->db
             ->where('active', 1)
