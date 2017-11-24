@@ -201,6 +201,18 @@ $currencies = array(
                             <div class="cat-product-title"><?=$product['title']; ?></div>
                             <div class="cat-product-prices">
                                 <?php
+                                // если продукт участвует в текущей активной акции
+                                if(!empty($action['products'][$product['id']]['percent'])){
+                                    // реальная цена идёт типа в «старую» (зачеркнута)
+                                    $product['price_old'] = $product['price'];
+                                    // акционная цена идёт типа как «реальная»
+                                    // сумма скидки
+                                    $sale = ($product['price'] * $action['products'][$product['id']]['percent']) / 100;
+                                    // цена со скидкой
+                                    $product['price'] = ceil($product['price'] - $sale);
+                                }
+                                ?>
+                                <?php
                                 $price_old = $product['price'];
                                 $price_old_class = ' vhidden';
                                 if(!empty($product['price_old'])){

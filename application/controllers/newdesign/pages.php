@@ -514,6 +514,8 @@ class Pages extends MY_Controller
 
             // получаем фото товаров и добавляем их к товарам
             if(!empty($ids)){
+                // участвуют ли продукты в текущей акции
+                $this->data['action'] = $this->check_products_action($ids);
                 $uploads_where = array(
                     'name' => 'product-photo',
 //                    'order' => 1
@@ -1150,5 +1152,36 @@ class Pages extends MY_Controller
         // var_dump($this->data);
         $this->load->vars($this->data);
         $this->load->view($this->view_container);
+    }
+
+    /**
+     * если продукты участвуют в активной акции
+     * то возвращает массив с информацией о скидке,
+     * назначенной каждому продукту в данной активной акции
+     * если не участвуют – то false
+     * @param $product_ids
+     * @return bool|array
+     */
+    public function check_products_action($product_ids)
+    {
+        $active_action = $this->db
+            ->where('active', 1)
+            ->where("NOW() BETWEEN `start` AND `end`", null, false)
+            ->limit(1)
+            ->get('action')->row_array();
+        if(!empty($active_action)){
+            $check_products['products'] = $this->db
+                ->where(array(
+                    'action_id' => $active_action['id'],
+                ))
+                ->where_in('product_id', $product_ids)
+                ->get('action_product')->result_array();
+            if(!empty($check_products['products'])) {
+                $check_products['products'] = toolIndexArrayBy($check_products['products'], 'product_id');
+                $check_products['action_info'] = $active_action;
+            }
+            return $check_products;
+        }
+        return false;
     }
 } 

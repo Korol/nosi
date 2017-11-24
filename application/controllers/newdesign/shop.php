@@ -1124,6 +1124,9 @@ class Shop extends MY_Controller
 
             // получаем фото товаров и добавляем их к товарам
             if(!empty($ids)){
+                // участвуют ли продукты в текущей акции
+                $this->data['action'] = $this->check_products_action($ids);
+                
                 $uploads_where = array(
                     'name' => 'product-photo',
 //                    'order' => 1

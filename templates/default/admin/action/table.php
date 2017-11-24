@@ -116,6 +116,7 @@ $header = (!empty($data_type)) ? (($data_type == 'category') ? ' в катего
                 </th>
                 <th>ID</th>
                 <th>Название</th>
+                <th>СК</th>
                 <th>Цена</th>
                 <th>Скидка по акции</th>
                 <th>Цена со скидкой</th>
@@ -144,6 +145,7 @@ $header = (!empty($data_type)) ? (($data_type == 'category') ? ' в катего
                         <?= $product['title']; ?>
                     </a>
                 </td>
+                <td><?= ($product['discount'] > 0) ? $product['discount'] : ''; ?></td>
                 <td><?= $product['price'] . ' грн'; ?></td>
                 <td>
                     <?= (!empty($action_products[$product['id']]['percent']))
